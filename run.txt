@@ -1,0 +1,3 @@
+/bin/bash /home/yuhenglei/THU/Projects/ZOAC_controller/run_exp.sh
+/bin/bash /home/yuhenglei/THU/Projects/ZOAC_VFunc/curve_5seed.sh
+/bin/bash /home/yuhenglei/THU/Projects/ZOAC_VFunc/ablation.sh
