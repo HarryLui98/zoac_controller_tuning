@@ -10,7 +10,6 @@ class MeanStdFilter(object):
         self.num = 0
 
     def forward(self, state):
-        # x = np.array(state, dtype=np.float32)
         obs = (state - self.mean) / (self.std + 1e-8)
         return torch.clamp(obs, min=-10, max=10)
 

@@ -18,7 +18,6 @@ class ACCEnv(gym.Env):
         self.state = None
         self.simulation_time = 0
         self.action = None
-        # self.dynamic_T = 0.1
         self.step_T = 0.1
         self.observation_space = gym.spaces.Box(
             low=np.array([-np.inf] * 10),

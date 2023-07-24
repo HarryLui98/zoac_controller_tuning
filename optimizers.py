@@ -57,6 +57,4 @@ class Adam(Optimizer):
         self.m = self.beta1 * self.m + (1 - self.beta1) * globalg
         self.v = self.beta2 * self.v + (1 - self.beta2) * (globalg * globalg)
         step = -a * self.m / (np.sqrt(self.v) + self.epsilon)
-        if self.stepsize > 1e-2:
-            self.stepsize -= 2e-4
         return step

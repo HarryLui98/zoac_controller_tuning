@@ -3471,3 +3471,8 @@ plot_learning_curve_acc.py
 plot_learning_curve_track.py
 plot_pid_curve_landscape.py
 visualize_landscape.py
+run_exp.sh
+run.txt
+__pycache__
+test
+.DS_Store

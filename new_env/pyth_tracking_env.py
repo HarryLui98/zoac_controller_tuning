@@ -163,9 +163,6 @@ class PathTrackingEnv(gym.Env):
         self.ref_points = self.compute_ref_points(xs)
         dead = bool(np.abs(delta_ys) > 4 or np.abs(delta_phis) > np.pi / 4. or np.abs(delta_vxs) > 4.)
         done = bool(dead or self.steps >= self.max_episode_steps)
-        # done = self.steps > self.max_episode_steps
-        # obs = np.concatenate((np.array([xs, v_xs-self.u_target, self.dynamic_state[2], self.dynamic_state[3],
-        #                                 delta_ys, delta_phis]), ref_points))
         obs = np.concatenate((self.dynamic_state, self.ref_points))
         if not done:
             cost = 0.01 * delta_vxs ** 2 + 0.04 * delta_ys ** 2 + 0.1 * delta_phis ** 2 \
@@ -197,14 +194,8 @@ class PathTrackingEnv(gym.Env):
             phi = self.path.compute_path_phi(x)
             x += self.u_target * self.step_T * math.cos(phi)
             y = self.path.compute_path_y(x)
-            # delta_y = y - y0
             ref_points.append(x)
             ref_points.append(y)
             phi = self.path.compute_path_phi(x)
-            # delta_phi = phi - phi0
-            # if delta_phi > math.pi:
-            #     delta_phi -= 2 * math.pi
-            # if delta_phi <= -math.pi:
-            #     delta_phi += 2 * math.pi
             ref_points.append(phi)
         return np.array(ref_points)

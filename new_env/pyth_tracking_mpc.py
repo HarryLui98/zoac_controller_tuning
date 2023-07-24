@@ -34,10 +34,6 @@ class ModelPredictiveController(object):
         self.tunable_para_mapped = np.random.uniform(-1, 1, 19)
         self.tunable_para_unmapped = self.tunable_para_transform(self.tunable_para_mapped, after_map=True)
         self.tunable_para_sigma = 0.01 * np.ones(19)
-        self.tunable_para_expert = np.array([-128915.5, -85943.6, 1.06, 1.85, 1412, 1536.7,
-                                             1e-6, 0.04, 0.1, 1e-6, 0.02, 5, 0.05,
-                                             1e-6, 0.04, 0.1, 1e-6, 0.02, 0.01])
-        self.tunable_para_expert_mapped = self.tunable_para_transform(self.tunable_para_expert, after_map=False)
         self.para_num = 19
         self.model_para_num = 6
         self.gamma = 0.99
@@ -167,5 +163,5 @@ class ModelPredictiveController(object):
         X = np.array(r['x']).tolist()
         action = np.array([X[6][0], X[7][0]])
         self.x0 = casadi.DM(
-            X[8:] + X[-8] + X[-7] + X[-6] + X[-5] + X[-4] + X[-3] + X[-2] + X[-1])  # for faster optimization
+            X[8:] + X[-8] + X[-7] + X[-6] + X[-5] + X[-4] + X[-3] + X[-2] + X[-1])  # warm start for faster optimization
         return action, np.array(X[8:14])

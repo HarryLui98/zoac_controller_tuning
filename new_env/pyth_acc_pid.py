@@ -1,7 +1,6 @@
 import random
 import math
 import numpy as np
-import casadi
 
 
 class PIDController(object):
@@ -9,7 +8,7 @@ class PIDController(object):
         random.seed(seed)
         np.random.seed(seed)
         self.action_space = env.action_space
-        # Tunable parameters (19):
+        # Tunable parameters (4):
         # K， Kp, Ki, Kd
         self.tunable_para_high = np.array([10., 10., 10., 10.])
         self.tunable_para_low = np.array([0., 0., 0., 0.])
@@ -18,8 +17,6 @@ class PIDController(object):
         self.tunable_para_mapped = np.random.uniform(-1, 1, 4)
         self.tunable_para_unmapped = self.tunable_para_transform(self.tunable_para_mapped, after_map=True)
         self.tunable_para_sigma = 0.01 * np.ones(4)
-        self.tunable_para_expert = np.array([2.4919961459921347, 0.8307365351188345, 0.0, 3.1172572813504384])
-        self.tunable_para_expert_mapped = self.tunable_para_transform(self.tunable_para_expert, after_map=False)
         self.para_num = 4
 
     def tunable_para_transform(self, para_in, after_map):

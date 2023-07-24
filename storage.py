@@ -9,20 +9,16 @@ class ActorBuffer(object):
         self.ptr = 0
         self.max_size = size
         self.advantages = np.zeros(size, dtype=np.float32)
-        self.modelerr = np.zeros(size, dtype=np.float32)
         self.deltas = np.zeros(size, dtype=np.int32)
-        self.para_nums = np.zeros(size, dtype=np.int32)
 
-    def store(self, adv, err, noise_idx, para_num=0):
+    def store(self, adv, noise_idx):
         assert self.ptr < self.max_size
         self.advantages[self.ptr] = adv
-        self.modelerr[self.ptr] = err
         self.deltas[self.ptr] = noise_idx
-        self.para_nums[self.ptr] = para_num
         self.ptr += 1
 
     def get(self):
-        return self.advantages, self.modelerr, self.deltas, self.para_nums
+        return self.advantages, self.deltas
 
     def reset(self):
         self.ptr = 0
